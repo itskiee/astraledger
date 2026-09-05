@@ -129,3 +129,7 @@ Both required. (b) is what makes the claim hold without an answer key; (a) prove
 ## Decision 021 — Deployment
 
 Local-first is primary (Blueprint Section 40). Optional public deployment with synthetic data only, clearly labelled (Final Plan Step 31). Both remain in scope.
+
+## Decision 022 - POrt No for postgres
+
+use 5433 9mstead of 5432 as it was already in use

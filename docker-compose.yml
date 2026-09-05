@@ -1,0 +1,33 @@
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: astraledger-postgres
+    restart: unless-stopped
+
+    # Values come from the .env file sitting next to this file.
+    # Nothing secret is written here, so this file is safe to commit.
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5433}:5432"
+
+    # Named volume: data lives outside the container and survives
+    # `docker compose down`. It is only destroyed by `down -v`.
+    volumes:
+      - astraledger_pg_data:/var/lib/postgresql/data
+
+    # "Running" and "ready for connections" are different things.
+    # pg_isready reports the second one.
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+volumes:
+  astraledger_pg_data:
