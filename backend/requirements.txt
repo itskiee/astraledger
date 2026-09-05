@@ -1,0 +1,28 @@
+# Web framework and server
+fastapi>=0.115
+uvicorn[standard]>=0.34
+
+# Database — psycopg 3, NOT psycopg2. The DATABASE_URL says
+# postgresql+psycopg:// which only works with version 3.
+sqlalchemy>=2.0
+alembic>=1.14
+psycopg[binary]>=3.2
+
+# Settings and validation
+pydantic>=2.10
+pydantic-settings>=2.7
+
+# File uploads (Step 7)
+python-multipart>=0.0.20
+
+# CSV parsing and fuzzy matching (Steps 8 and 22)
+polars>=1.17
+rapidfuzz>=3.11
+
+# Authentication (Step 5, per Decision 013)
+passlib[bcrypt]>=1.7.4
+pyjwt>=2.10
+
+# Testing
+pytest>=8.3
+httpx>=0.28
